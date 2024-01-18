@@ -86,6 +86,11 @@ const config = {
             label: '시작하기',
           },
           {
+            to: '/docs/guides/component-accordion',
+            position: 'left',
+            label: '컴포넌트 설명',
+          },
+          {
             to: '/docs/guides/component-basic',
             position: 'left',
             label: '활용가이드',
