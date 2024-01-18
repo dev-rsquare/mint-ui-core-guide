@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmint_ui_core_guide=self.webpackChunkmint_ui_core_guide||[]).push([[12],{4181:u=>{u.exports=JSON.parse('{"label":"docusaurus","permalink":"/mint-ui-core-guide/blog/tags/docusaurus","allTagsPath":"/mint-ui-core-guide/blog/tags","count":4}')}}]);
