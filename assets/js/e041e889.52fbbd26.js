@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmint_ui_core_guide=self.webpackChunkmint_ui_core_guide||[]).push([[2897],{4364:e=>{e.exports=JSON.parse('{"label":"facebook","permalink":"/mint-ui-core-guide/blog/tags/facebook","allTagsPath":"/mint-ui-core-guide/blog/tags","count":1}')}}]);
