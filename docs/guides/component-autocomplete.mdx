@@ -1,1 +1,181 @@
+import { AutocompleteBasic, AutocompleteRenderer, AutocompleteMaxWidth } from '@site/src/components/examples/AutocompleteExamples'
+
 # Autocomplete
+
+자동완성을 지원하는 Input 컴포넌트의 변형된 형태의 컴포넌트입니다.
+
+내부적으로 [Input](./component-input) 컴포넌트를 사용합니다.
+
+```javascript
+import { Autocomplete, Form, SuggestedItem } from '@mint-ui/core';
+
+interface SampleData {
+  name: string;
+  value: string;
+}
+
+function getData(cnt:number):SuggestedItem<SampleData>[] {
+  return Array.from(Array(cnt)).map((_, idx) => ({
+    label: `name:${idx}`,
+    value: {
+      name: `name:${idx}`,
+      value: `value:${idx}`,
+    },
+  } as SuggestedItem<SampleData>));
+}
+
+// 테스트 데이터
+const data = getData(100);
+
+// 가상 api
+async function search(value: string) {
+  return data.filter((item) => item.label.indexOf(value) >= 0);
+}
+
+export function AutocompleteBasic() {
+  const [ searchData, setSearchData ] = useState({ value: '' });
+
+  // key 입력시마다 호출되는 부분
+  const handleKeyInput = (value: string) => {
+    if (value) {
+      return search(value);
+    }
+    return [];
+  };
+
+  useEffect(() => {
+    console.log('changed', searchData);
+  }, [ searchData ]);
+
+  return (
+    <Frame>
+      <Form
+        data={searchData}
+        setData={setSearchData}
+        onFormSubmit={(() => {
+          console.log('form submit');
+        })}
+        formId='aaaa'
+      >
+        <Autocomplete
+          width='200px'
+          placeholder='숫자를 검색해주세요.'
+          targetId='value'
+          onKeyInput={(value) => handleKeyInput(value)}
+          onSelectItem={(v) => {
+            console.log('선택됨', v);
+            setSearchData({ value: v.value.name });
+          }}
+          onSubmit={(e) => e.stopPropagation()}
+        />
+      </Form>
+    </Frame>
+  );
+}
+```
+
+<AutocompleteBasic />
+
+## 속성 설명
+
+### width
+```javascript
+width: CSSProperties['width']
+```
+
+자동완성 input 의 폭을 지정합니다.
+
+### onKeyInput
+
+```javascript
+export interface SuggestedItem<P> {
+  label:string;
+  value:P;
+}
+
+onKeyInput 
+=> (inputValue:string)=>Promise<SuggestedItem<P>[]>|SuggestedItem<P>[]
+```
+
+키 입력시마다 호출되는 콜백입니다.
+
+파라미터로 들어오는 inputValue 는 입력된 input 의 값 입니다. 이 값을 받아서 자동완성 후보 리스트를 리턴해주면 자동완성 대상으로 표시됩니다.
+
+SuggestedItem 의 label 이 자동완성 대상에 표시될 값입니다.
+여기에 특정 value 를 매칭해놓으면 나중에 값을 선택했을때 단순히 input 의 입력값 외에도 원하는 데이터를 얻어서 처리할 수 있습니다.
+
+### onSelectItem
+
+```javascript
+onSelectItem:(item:SuggestedItem<P>)=>void;
+```
+
+자동완성 리스트에서 선택을 했을때 호출되는 콜백입니다.
+
+크게 두가지 상황에서 호출될 수 있습니다.
+- 마우스 클릭시
+- 키보드 방향키로 이동 후 엔터키 입력시
+
+제공되는 item 파라미터는 클릭한 아이템에 해당되는 SuggestedItem 값 입니다.
+
+### (optional) itemRenderer
+
+자동완성 리스트의 렌더링을 커스터마이징 할 수 있게 해주는 함수입니다.
+
+```javascript
+itemRenderer?:(item:SuggestedItem<P>, index:number)=>JSX.Element;
+```
+
+자동완성 리스트 컨테이너 하위에 렌더링할 대상의 수 만큼 이 함수가 호출됩니다.
+
+이때, item은 SuggestedItem 값이고 index 는 현재 렌더링 대상 아이템의 인덱스 값 입니다.
+
+```javascript
+<Autocomplete
+  width='200px'
+  placeholder='숫자를 검색해주세요.'
+  targetId='value'
+  onKeyInput={(value) => handleKeyInput(value)}
+  onSelectItem={(v) => {
+    console.log('선택됨', v);
+    setSearchData({ value: v.value.name });
+  }}
+  itemRenderer={(item, idx)=>{
+    return <div>{`${item.label} - ${idx}`}</div>
+  }}
+/>
+```
+
+<AutocompleteRenderer />
+
+### (optional) itemMaxWidth
+
+```javascript
+itemMaxWidth?:string;
+```
+
+자동완성 리스트의 최대 폭을 지정합니다.
+
+기본적으로 자동완성 리스트는 자동완성 input 의 크기를 최소 폭으로 갖습니다.
+최대폭은 내부 아이템의 크기에 따라 늘어납니다.
+
+itemMaxWidth 를 지정하면 이 크기를 원하는 길이로 제한할 수 있습니다. 예를 들어 input 의 크기와 동일하게 설정하면 자동완성 리스트는 input 의 크기에 맞춰지게 됩니다.
+
+```javascript
+<Autocomplete
+  width='200px'
+  placeholder='숫자를 검색해주세요.'
+  targetId='value'
+  onKeyInput={(value) => handleKeyInput(value)}
+  onSelectItem={(v) => {
+    console.log('선택됨', v);
+    setSearchData({ value: v.value.name });
+  }}
+  itemRenderer={(item, idx)=>{
+    return <div>{`${item.label} - ${idx}ssssssssssssssssssss`}</div>
+  }}
+  itemMaxWidth='200px'
+/>
+```
+
+<AutocompleteMaxWidth />

@@ -84,7 +84,7 @@ export function AnimatorBasic(){
 
 ## 속성 설명
 
-### config
+### (optional) config
 - **타입 : AnimationConfig**
 
 ```javascript
@@ -108,7 +108,7 @@ animation 은 css 의 animation 정의와 동일합니다.
 animation: `${moveRightKeyframe.getName()} 0.7s forwards`
 ```
 
-### animationEnd
+### (optional) animationEnd
 - **타입 : (config:AnimationConfig) => void**
 
 현재 애니메이션이 종료되었을때 호출됩니다.  파라미터로 현재 재생중인 애니메이션의 config 정보가 제공됩니다.
