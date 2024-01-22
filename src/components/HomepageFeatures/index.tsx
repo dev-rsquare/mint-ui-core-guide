@@ -10,26 +10,26 @@ interface FeatureItem {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: '통일된 인터페이스',
+    title: 'React 전용',
     description: (
       <>
-        각기 다른 맵의 API 를 통일하여 하나의 코드로 여러가지 지도 서비스를 구현할 수 있습니다.
+        코어 라이브러리를 React 로 래핑한 것이 아닌 순수 React 용 라이브러리입니다.
       </>
     ),
   },
   {
-    title: 'React 라이프사이클',
+    title: 'Headless UI',
     description: (
       <>
-        React 의 라이프사이클 내에서 지도 API 가 연결되어 있으므로 지도 관련 객체의 생성/해제를 신경쓰지 않아도 됩니다.
+        특정 디자인이 입혀지지 않은 Headless 함을 지향합니다.
       </>
     ),
   },
   {
-    title: '편리한 유틸의 제공',
+    title: '고급 컴포넌트 지원',
     description: (
       <>
-        자주 사용하는 거리나 폴리곤 관련된 계산을 해주는 유틸이 내장되어 있습니다.
+        그리드나 테이블과 같은 복잡한 컴포넌트를 지원합니다.
       </>
     ),
   },
