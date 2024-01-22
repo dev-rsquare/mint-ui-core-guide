@@ -1,12 +1,8 @@
-import { CarouselBasic } from '@site/src/components/examples/CarouselExamples'
+import { Button, Carousel, CarouselHanlderProps, Flex } from '@mint-ui/core';
+import React, { useRef, useState } from 'react';
 
-# Carousel
+import { Frame } from '../common/Frame';
 
-가로방향의 슬라이드를 지원하는 컴포넌트입니다.
-
-렌더 함수를 통해 원하는 컴포넌트를 렌더링하여 슬라이딩 시킬 수 있습니다.
-
-```javascript
 export function CarouselBasic() {
 
   const [ handleState, setHandleState ] = useState<CarouselHanlderProps>({
@@ -28,7 +24,7 @@ export function CarouselBasic() {
         width={1024}
         height={768}
         total={dataset.current.length}
-        infinite
+        // infinite
         onLoad={setHandleState}
         render={(i) => (
           <img width='100%' height='100%' src={dataset.current[i]} />
@@ -49,59 +45,3 @@ export function CarouselBasic() {
     </Frame>
   );
 }
-```
-
-<CarouselBasic />
-
-## 속성 설명
-
-### total
-
-```javascript
-total: number;
-```
-
-전체 아이템의 갯수로 렌더링 함수가 반복될 크기를 설정합니다.
-
-### render
-
-```javascript
-render = CarouselItemRenderHandler = (index: number) => JSX.Element
-```
-
-주어진 index 에 맞게 슬라이드 아이템을 렌더링하는 함수입니다.
-
-### (optional) defaultIndex
-
-캐러셀이 렌더링될때 가장 처음 인덱스를 지정합니다.
-
-기본값은 0 입니다.
-
-### (optional) infinite
-
-이 값이 true 이면 슬라이드 가장 마지막에 도달했을때 다음 이동을 첫 index 로 이동하여 계속 순환하게 동작합니다.
-
-기본은 맨 마지막에서 멈춘 이후에는 아무 동작을 하지 않습니다.
-
-### (optional) onLoad
-
-```javascript
-onLoad = CarouselLoadHandler = (handle: CarouselHanlderProps) => void
-```
-
-캐러셀이 로드되면 호출되는 함수입니다.  이때 캐러셀의 컨트롤을 파라미터로 받을 수 있습니다. 
-
-컨트롤은 다음과 같습니다.
-
-- move: (direction: 'left' | 'right') => void
-슬라이드를 지정한 direction 으로 움직입니다.
-- moveto: (num: number) => void
-슬라이드를 지정한 num 인덱스로 이동시킵니다.
-
-### (optional) onChange
-
-```javascript
-onChange = CarouselChangeHandler = (index: number) => void
-```
-
-슬라이드로 인해 인덱스가 변경되었을때 호출되는 함수입니다. 파라미터로 변경된 인덱스가 제공됩니다.
