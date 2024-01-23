@@ -28,7 +28,13 @@ const sidebars = {
         'guides/component-autocomplete',
         'guides/component-button',
         'guides/component-carousel',
-        'guides/component-chart',
+        {
+          type: 'category',
+          label: 'Chart',
+          items: [
+            'guides/component-line-chart',
+          ]
+        },
         'guides/component-check',
         'guides/component-context-menu',
         'guides/component-dropdown',
