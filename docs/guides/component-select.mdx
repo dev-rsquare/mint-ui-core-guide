@@ -1,1 +1,99 @@
+import { SelectBasic } from '@site/src/components/examples/Selects'
+
 # Select
+
+select 를 래핑한 컴포넌트입니다. 기본 select 기능 외에 몇가지 추가 기능이 있습니다.
+
+```javascript
+export function SelectBasic(){
+
+  const [data, setData] = useState({
+    aaa: 'a',
+  })
+
+  return <Frame>
+    <div>data.aaa = {String(data.aaa)}</div>
+    <div>---------------------</div>
+    <Form formId="my-form" data={data} setData={setData}>
+      <Flex rowDirection flexGap="10px">
+        <Flex>
+          <div>
+            select
+          </div>
+          <div>
+            <Select
+            targetId='aaa'
+            item={[
+              {label:'A', value:'a'},
+              {label:'B', value:'b'},
+              {label:'C', value:'c'},
+            ]}
+            />
+          </div>
+          <div>
+            select (radio type)
+          </div>
+          <div>
+            <Select
+            targetId='aaa'
+            type="radio"
+            item={[
+              {label:'A', value:'a'},
+              {label:'B', value:'b'},
+              {label:'C', value:'c'},
+            ]}
+            />
+          </div>
+        </Flex>
+      </Flex>
+    </Form>
+  </Frame>
+}
+```
+
+<SelectBasic />
+
+## 속성 설명
+
+### targetId
+```javascript
+targetId = keyof T
+```
+
+Form 에 바인딩된 T 타입에 대한 속성을 targetId 에 지정합니다. 해당 속성과 select 가 바인딩됩니다.
+
+### item
+```javascript
+item = SelectItem<V>[]
+
+interface SelectItem<V> {
+  label:string;
+  value:T;
+}
+```
+
+select 의 option 을 정의하는 속성입니다. 
+
+#### label
+option 의 label입니다. 배열 순서대로 표시됩니다.
+
+#### value
+value 는 일반 select 와는 다르게 타입이 자유롭습니다.
+string, number 또는 일반 객체나 배열도 할당이 가능하지만 내부적으로 "===" 로 비교 처리되기 때문에
+레퍼런스가 바뀌면 올바르게 처리되지 않을 수 있음에 유의해야합니다.
+
+### (optional) type
+```javascript
+type = SelectType = 'select'|'radio'
+```
+
+이 값을 'radio' 로 지정하면 기본 select 형식외에 radio 타입으로도 렌더링할 수 있습니다.
+이때 radio 의 name 속성은 기본적으로 targetId 와 동일하게 셋팅됩니다.
+
+### (optional) radioName
+```javascript
+radioName = string
+```
+
+type 을 'radio' 로 지정했을때 radio 의 name 속성을 직접 지정할 수 있습니다.
+targetId 로 설정시 name 이 겹치는 경우에 사용할 수 있습니다.

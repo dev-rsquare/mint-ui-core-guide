@@ -1,1 +1,57 @@
+import { TextareaBasic } from '@site/src/components/examples/Textareas'
+
 # Textarea
+
+[Form](./component-form.mdx) 컴포넌트와 같이 사용되는 textarea 형식의 컴포넌트입니다. 
+
+기본 사용이 [Input](./component-input.mdx) 컴포넌트와 동일합니다. (mint-ui validate 포함)
+
+```javascript
+export function TextareaBasic(){
+
+  const [data, setData] = useState({
+    aaa:'a',
+  })
+
+  return <Frame>
+    <div>data.aaa = {data.aaa}</div>
+    <div>---------------------</div>
+    <Form formId="my-form" data={data} setData={setData}>
+      <Flex flexGap="10px">
+        <span>
+          aaa : 
+          {/* data.aaa 와 바인딩 */}
+          {/* a~z 글자만 입력 허용 */}
+          {/* maxLength = 30 */}
+          <TextArea targetId='aaa' 
+          validCharacter={/[a-z]/} 
+          maxLength={30}
+          />
+        </span> 
+      </Flex>
+    </Form>
+    <Button type="submit" form="my-form">전송</Button>
+  </Frame>
+}
+```
+
+<TextareaBasic />
+
+textarea 엘레먼트의 속성을 동일하게 가지므로 maxLength 와 같은 textarea 의 속성도 사용 가능합니다.
+
+## 속성 설명
+
+### targetId
+```javascript
+targetId = keyof T
+```
+
+Form 에 바인딩된 T 타입에 대한 속성을 targetId 에 지정합니다. 해당 속성과 textarea 가 바인딩됩니다.
+
+### (optional) validValue
+
+[Input](./component-input.mdx#optional-validvalue) 컴포넌트의 validValue 와 같습니다.
+
+### (optional) validCharacter
+
+[Input](./component-input.mdx#optional-validcharacter) 컴포넌트의 validValue 와 같습니다.

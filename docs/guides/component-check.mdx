@@ -1,1 +1,73 @@
+import { CheckBasic } from '@site/src/components/examples/Checks'
+
 # Check
+
+input 의 type='checkbox' 를 래핑한 컴포넌트입니다.
+
+기본적인 사용은 checked 값을 form data 에 연결하는 것입니다. 이때 값은 boolean 으로만 처리됩니다.
+
+```javascript
+export function CheckBasic(){
+
+  const [data, setData] = useState({
+    aaa:false,
+    bbb:[],
+  })
+
+  return <Frame>
+    <div>data.aaa = {String(data.aaa)}</div>
+    <div>data.bbb = {JSON.stringify(data.bbb)}</div>
+    <div>---------------------</div>
+    <Form formId="my-form" data={data} setData={setData}>
+      <Flex rowDirection flexGap="10px">
+        <Flex>
+          <span>
+            aaa checked <Check targetId='aaa'/>
+          </span>
+        </Flex>
+        <Flex>
+          <div>
+            bbb multi check
+          </div>
+          <div>
+            1:<Check targetId='bbb' value={1}/>
+            2:<Check targetId='bbb' value={2}/>
+            3:<Check targetId='bbb' value={3}/>
+          </div>
+        </Flex>
+      </Flex>
+    </Form>
+  </Frame>
+}
+```
+
+<CheckBasic />
+
+## 속성 설명
+
+### targetId
+```javascript
+targetId = keyof T
+```
+
+Form 에 바인딩된 T 타입에 대한 속성을 targetId 에 지정합니다. 해당 속성과 input 이 바인딩됩니다.
+
+### value
+```javascript
+value = CheckValue = string | number
+```
+
+일반적인 checkbox 와는 다른 멀티값 바인딩을 위한 속성입니다.
+
+가장 위의 예시에서 볼수 있듯이 **value 를 설정**하고, **targetId 의 타입이 배열**인 경우 
+체크했을때 해당 value 값이 배열에 들어갑니다. (체크해제하면 다시 빠지는 토글기능)
+
+```javascript
+const [data, setData] = useState({
+  bbb:[], // bbb 는 배열
+})
+...
+<Check targetId='bbb' value={1}/> // 값 1을 토글
+<Check targetId='bbb' value={2}/> // 값 2을 토글
+<Check targetId='bbb' value={3}/> // 값 3을 토글
+```
