@@ -208,7 +208,7 @@ function SearchHistory({ inputRef, recentRef, favoriteRef, favoriteList, setFavo
           setLastHovered((prevHovered) => (prevHovered + 1) % totalLength);
           scrollDown();
         } else if (event.key === 'Enter') {
-          let pathName = '/mint-ui-map-guide';
+          let pathName = '/mint-ui-core-guide';
           let item;
           if (lastHovered < searchList.length) {
             item = searchList[lastHovered]
@@ -467,7 +467,7 @@ function SearchResult({ composeEnd, favoriteList, searchList, setSearchList, isS
         setLastHovered((lastHovered + 1) % totalLength);
         scrollDown();
       } else if (event.key === 'Enter') {
-        let pathName = '/mint-ui-map-guide';
+        let pathName = '/mint-ui-core-guide';
         let item;
         if (lastHovered < pageData.length) {
           item = pageData[lastHovered]

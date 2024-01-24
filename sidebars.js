@@ -28,38 +28,37 @@ const sidebars = {
         'guides/component-autocomplete',
         'guides/component-button',
         'guides/component-carousel',
-        'guides/component-chart',
-        'guides/component-check',
+        {
+          type: 'category',
+          label: 'Chart',
+          items: [
+            'guides/component-line-chart',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Form',
+          items: [
+            'guides/component-form',
+            'guides/component-input',
+            'guides/component-check',
+            'guides/component-select',
+            'guides/component-radio',
+            'guides/component-textarea',
+          ]
+        },
         'guides/component-context-menu',
         'guides/component-dropdown',
         'guides/component-flex',
         'guides/component-flip-text',
-        'guides/component-form',
         'guides/component-grid',
-        'guides/component-input',
         'guides/component-loading',
         'guides/component-modal-wrapper',
-        'guides/component-radio',
-        'guides/component-select',
         'guides/component-table',
         'guides/component-text',
-        'guides/component-textarea',
         'guides/component-toast',
         'guides/component-tree',
         'guides/component-virtual-list',
-        // {
-        //   type: 'category',
-        //   label: '지도',
-        //   items: [
-        //     'guides/map-basic',
-        //     'guides/map-initialize',
-        //     'guides/map-event',
-        //     'guides/map-cache',
-        //     'guides/map-throttling',
-        //     'guides/map-loading-component',
-        //     'guides/map-debug',
-        //   ]
-        // },
       ],
     },
     {

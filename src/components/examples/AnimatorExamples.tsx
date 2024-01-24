@@ -1,11 +1,8 @@
-import { AnimatorBasic } from '@site/src/components/examples/AnimatorExamples'
-
-# Animator
-
-css 애니메이션을 정의하고 컨트롤하기 쉽게 해주는 래퍼 컴포넌트입니다. 특히 styled-components 의 keyframes 을 이용해야 할때 유용합니다.
-
-```javascript
+import { AnimationConfig, Animator } from "@mint-ui/core";
+import React from "react";
+import { useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { Frame } from "../common/Frame";
 
 const popupKeyframe = keyframes`
   from {
@@ -78,40 +75,3 @@ export function AnimatorBasic(){
     </MyAnimatorWrapper>
   </Frame>
 }
-```
-
-<AnimatorBasic />
-
-## 속성 설명
-
-### (optional) config
-- **타입 : AnimationConfig**
-
-```javascript
-interface AnimationConfig<T> = {
-  name:T;
-  animation:string;
-}
-```
-
-css 애니메이션의 내부 이름과 animation 속성을 정의합니다.
-
-name 에는 이름의 종류를 타입으로 지정할 수 있습니다. 가장 처음의 예제에서는 아래와 같이 정의했습니다.
-
-```javascript
-type MyAnimationType = 'start'|'move-right'|'move-left'|'end';
-```
-
-animation 은 css 의 animation 정의와 동일합니다.
-
-```javascript
-animation: `${moveRightKeyframe.getName()} 0.7s forwards`
-```
-
-### (optional) animationEnd
-- **타입 : (config:AnimationConfig) => void**
-
-현재 애니메이션이 종료되었을때 호출됩니다.  파라미터로 현재 재생중인 애니메이션의 config 정보가 제공됩니다.
-
-특정 애니메이션이 종료되었을때 어떤 행동을 해야하는 경우 유용합니다.  
-예를 들어 특정 애니메이션이 끝나고 실제 컴포넌트를 해제처리 하고 싶으면 animationEnd 에서 컴포넌트 해제 로직을 넣으면 됩니다.
