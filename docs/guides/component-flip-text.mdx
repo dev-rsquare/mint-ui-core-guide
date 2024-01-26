@@ -1,1 +1,109 @@
+import { FlipTextBasic, FlipTextBasic2 } from '@site/src/components/examples/FlipText';
+
 # FlipText
+
+Text 의 Flip 애니메이션 효과를 내주는 컴포넌트입니다. 애니메이션 효과 조정을 위한 속성을 제공합니다.
+
+```javascript
+export function FlipTextBasic(){
+  return <Frame>
+    <FlipText
+      value='123,456,789'
+      fontWeight={700}
+      fontFamily='Pretendard'
+      color='#3F3E6C'
+      fontSize='60px'
+      characterWidth='33px'
+      characterHeight='70px'
+      delayBetweenCharacter={200}
+      transitionSpeed={1500}
+      flipCount={10}
+    />
+  </Frame>
+}
+```
+
+숫자형태의 텍스트인 경우에는 한 글자당 0~9 까지 순환합니다.
+
+<FlipTextBasic />
+
+```javascript
+export function FlipTextBasic2(){
+  return <Frame>
+    <FlipText
+      value='나는 1플립텍스트3 이다.'
+      fontWeight={700}
+      fontFamily='Pretendard'
+      color='#3F3E6C'
+      fontSize='60px'
+      characterWidth='33px'
+      characterHeight='70px'
+      delayBetweenCharacter={200}
+      transitionSpeed={1500}
+      flipCount={10}
+    />
+  </Frame>
+}
+```
+
+숫자가 아닌 글자의 경우에는 순환 없이 아래에서 글자가 나타납니다.
+
+<FlipTextBasic2 />
+
+## 속성 설명
+
+### value
+```javascript
+value = string
+```
+
+효과를 처리할 대상 string 입니다. 내부적으로 한글자씩 잘라서 숫자인지 아닌지 판단하고 각각 효과를 처리합니다.
+
+> 단, 공백은 처리대상이 아닙니다.
+
+### characterWidth
+
+```javascript
+characterWidth = string
+```
+
+한 글자당 차지하는 폭을 지정합니다.
+
+FlipText 는 일반 텍스트와 다르게 한 글자당 하나의 div 로 감싸져서 글자끼리 이어져 있는 형태입니다. 이 div 의 크기를 정합니다.
+
+### characterHeight
+
+```javascript
+characterHeight = string
+```
+
+한 글자당 차지하는 높이를 지정합니다.
+
+## 애니메이션 설정
+
+### (optional) delayBetweenCharacter
+```javascript
+delayBetweenCharacter = number
+```
+
+글자가 여러글자인 경우 글자마다 애니메이션 되는 타이밍이 순차적으로 다릅니다. 이때 한 글자와 다음글자 사이의 딜레이를 지정할 수 있습니다.
+
+단위는 ms 이고, 기본값은 100ms 입니다.
+
+### (optional) transitionSpeed
+```javascript
+transitionSpeed = number
+```
+
+애니메이션되는 속도를 지정합니다. 1글자의 애니메이션 길이를 의미합니다.
+
+단위는 ms 이고, 기본값은 700ms 입니다.
+
+### (optional) flipCount
+```javascript
+flipCount = number
+```
+
+글자가 숫자인 경우 몇개까지 순환시킬것인지 지정합니다. 만약 글자가 0 인경우 67890 순서의 5개 글자가 순환됩니다.
+
+기본값은 5입니다.
