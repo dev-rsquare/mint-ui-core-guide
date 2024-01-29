@@ -53,7 +53,7 @@ const sidebars = {
         'guides/component-flip-text',
         'guides/component-grid',
         'guides/component-loading',
-        'guides/component-modal-wrapper',
+        // 'guides/component-modal-wrapper', 이건 제외.  구현이 이상하게 되어있는듯
         'guides/component-table',
         'guides/component-text',
         'guides/component-toast',
