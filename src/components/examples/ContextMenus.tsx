@@ -1,15 +1,17 @@
 import { Flex, useContextMenu } from "@mint-ui/core";
 import React from "react";
 import { Frame } from "../common/Frame";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+import useIsBrowser from "@docusaurus/useIsBrowser";
 
 export function ContextMenuBasic(){
 
-  const { contextElement, show } = useContextMenu(
-  <div style={{border:'1px solid gray', background:'#efefef', padding:'10px 15px'}}>
+  const isBrowser = useIsBrowser();
+  const { contextElement, show } = isBrowser?useContextMenu(<div style={{border:'1px solid gray', background:'#efefef', padding:'10px 15px'}}>
     <div>뒤로</div>
     <div>앞으로</div>
     <div>새로고침</div>
-  </div>)
+  </div>):{ contextElement:<></>, show(){} }
 
   return <Frame>
     {contextElement} {/* useContextMenu 를 통해 얻은 element 를 삽입 */}
