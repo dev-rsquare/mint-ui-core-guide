@@ -90,11 +90,11 @@ const config = {
             position: 'left',
             label: '컴포넌트 설명',
           },
-          {
-            to: '/docs/guides/component-basic',
-            position: 'left',
-            label: '활용가이드',
-          },
+          // {
+          //   to: '/docs/guides/component-basic',
+          //   position: 'left',
+          //   label: '활용가이드',
+          // },
           {
             type: 'search',
             position: 'right',
