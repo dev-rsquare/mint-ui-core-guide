@@ -1,10 +1,8 @@
-import { RadioBasic } from '@site/src/components/examples/Radios'
+import { Flex, Form, Radio } from "@mint-ui/core";
+import React, { useRef } from "react";
+import { useState } from "react";
+import { Frame } from "../common/Frame";
 
-# Radio
-
-input type='radio' 를 래핑한 컴포넌트입니다.
-
-```javascript
 export function RadioBasic(){
 
   const value1 = useRef({value:'1'});
@@ -53,33 +51,3 @@ export function RadioBasic(){
     </Form>
   </Frame>
 }
-```
-
-<RadioBasic />
-
-## 속성 설명
-
-### targetId
-```javascript
-targetId = keyof T
-```
-
-Form 에 바인딩된 T 타입에 대한 속성을 targetId 에 지정합니다. 해당 속성과 radio 가 바인딩됩니다.
-
-### radioValue
-```javascript
-radioValue = V
-```
-radioValue 는 일반 radio 와는 다르게 타입이 자유롭습니다.
-string, number 또는 일반 객체나 배열도 할당이 가능하지만 내부적으로 "===" 로 비교 처리되기 때문에
-레퍼런스가 바뀌면 올바르게 처리되지 않을 수 있음에 유의해야합니다.
-
-### (optional) radioName
-```javascript
-radioName = string
-```
-
-radio 의 name 속성을 직접 지정할 수 있습니다.
-기본적으로 targetId 와 동일하게 셋팅됩니다.
-
-targetId 로 설정시 name 이 겹치는 경우에 사용할 수 있습니다.

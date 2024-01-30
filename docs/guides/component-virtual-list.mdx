@@ -1,1 +1,56 @@
+import {VirtualListBasic, VirtualListRow} from '@site/src/components/examples/VirtualList'
+
 # VirtualList
+
+리스트의 가상 렌더링을 지원하는 컴포넌트입니다.
+반복되는 데이터를 모두 렌더링하지 않고 보이는 만큼만 렌더링하여 데이터의 크기와 관계없이 부드러운 스크롤이 가능하게 해줍니다.
+
+ForwardRef 컴포넌트로 리스트에 대한 컨트롤을 ref 를 통해 얻을 수 있습니다.
+
+```javascript
+export function VirtualListBasic(){
+
+  const [ data ] = useState(Array.from(Array(100000)).map((_, idx)=>({name:`idx-${idx}`})))
+  
+  const renderRows = (idx:number) => {
+    return <Flex key={`row-${idx}`} flexAlign='center' flexHeight='40px'>{data[idx].name}</Flex>;
+  }
+
+  return <Frame>
+    <Flex flexHeight="35px">data 갯수 : {data.length}</Flex>
+    <Flex flexHeight="400px">
+      <VirtualList
+      itemRenderer={renderRows}
+      length={data.length}
+      />
+    </Flex>
+  </Frame>
+}
+```
+
+<VirtualListBasic />
+
+## 속성 설명
+
+### (optional) itemRenderer
+```javascript
+itemRenderer = ItemRenderer = (index: number, key: number | string) => JSX.Element
+```
+
+리스트의 row 렌더러를 지정합니다. 해당 함수에는 현재 렌더링해야할 data 의 index 와 임의의 key 값이 주어집니다.
+
+### (optional) length
+```javascript
+length = number
+```
+
+data 의 총 길이를 설정합니다. 이 값을 기준으로 가상 렌더링 환경을 잡게 됩니다.
+
+### (optional) threshold
+```javascript
+threshold = number
+```
+
+가상 스크롤시 부드러운 처리를 위해 보이는것 보다 약간 더 렌더링을 하게 되는데, 이 정도를 조정합니다.
+
+기본값은 100입니다.

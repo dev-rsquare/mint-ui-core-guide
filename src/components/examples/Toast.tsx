@@ -1,13 +1,8 @@
-import { ToastBasic, ToastCustom, ToastIcon, ToastAnimation } from '@site/src/components/examples/Toast'
+import React, { useRef, useState } from "react";
+import { Frame } from "../common/Frame";
+import { Button, Flex, Toast, ToastControl } from "@mint-ui/core";
+import styled from "styled-components";
 
-# Toast
-
-원하는 위치에 팝업을 띄울 수 있는 컴포넌트입니다. 팝업은 일정시간 이후에 사라집니다.
-
-ForwardRef 컴포넌트로, 팝업의 컨트롤을 ref 를 통해 얻을 수 있습니다.
-
-
-```javascript
 export function ToastBasic(){
   const control = useRef<ToastControl|null>(null);
   const divRef = useRef<HTMLDivElement|null>(null);
@@ -27,29 +22,7 @@ export function ToastBasic(){
     />
   </Frame>
 }
-```
 
-<ToastBasic />
-
-## 속성 설명
-
-### (optional) timeToShow
-```javascript
-timeToShow = number
-```
-
-팝업을 보여주는 시간입니다. 헤당 시간 이후에 팝업은 사라집니다. ms 단위로 지정합니다.
-
-**만약 이 값을 0으로 주면 자동으로 사라지지 않습니다.**
-
-### (optional) toastBody
-```javascript
-toastBody = JSX.Element
-```
-
-toastBody 을 사용하면 팝업 전체를 커스터마이징 할 수 있습니다.  기본 특성은 그대로 유지됩니다.
-
-```javascript
 export function ToastCustom(){
   const control = useRef<ToastControl|null>(null);
   const divRef = useRef<HTMLDivElement|null>(null);
@@ -77,18 +50,7 @@ export function ToastCustom(){
     />
   </Frame>
 }
-```
 
-<ToastCustom />
-
-### (optional) toastIcon
-```javascript
-toastIcon = JSX.Element
-```
-
-팝업 왼쪽에 뜨는 아이콘을 지정할 수 있습니다.
-
-```javascript
 export function ToastIcon(){
   const control = useRef<ToastControl|null>(null);
   const divRef = useRef<HTMLDivElement|null>(null);
@@ -109,18 +71,7 @@ export function ToastIcon(){
     />
   </Frame>
 }
-```
 
-<ToastIcon />
-
-### (optional) showAnimation
-```javascript
-showAnimation = string
-```
-
-팝업이 보여질때 사용되는 애니메이션을 지정합니다. 이때 keyframes 정의는 따로 있어야 합니다.
-
-```javascript
 const StyledAnimation = styled.div`
   @keyframes slidein {
     from {
@@ -168,28 +119,3 @@ export function ToastAnimation(){
     </StyledAnimation>
   </Frame>
 }
-```
-<ToastAnimation />
-
-### (optional) hideAnimation
-```javascript
-hideAnimation = string
-```
-
-팝업이 사라질때 사용되는 애니메이션을 지정합니다. showAnimation 과 사용법은 같습니다.
-
-## 컨트롤 설명
-
-### showMessage
-```javascript
-showMessage = ToastMessageShow = (message?: string, elem?: HTMLElement, offsetLeft?:number, offsetTop?:number) => void
-```
-
-메시지를 보여줄때 호출할 수 있습니다. 다음은 파라미터 설명입니다.
-
-|파라미터|타입|설명|
-|---|---|---|
-|message|string|팝업에 보여줄 메시지를 지정합니다.|
-|elem|HTMLElement|팝업의 위치를 보여줄 기본 Element 를 지정합니다. 이 Element 의 위치(left-top)를 기준으로 팝업이 보여집니다.|
-|offsetLeft|number|기본 팝업의 위치에서 left 방향 보정값을 설정합니다. 만약 50을 넣으면 기본위치에서 x축으로 + 50px 위치에 팝업이 보여집니다.|
-|offsetTop|number|기본 팝업의 위치에서 top 방향 보정값을 설정합니다. 만약 50을 넣으면 기본위치에서 y축으로 + 50px 위치에 팝업이 보여집니다.|

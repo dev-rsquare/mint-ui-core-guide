@@ -47,7 +47,7 @@ targetId = keyof T
 
 Form 에 바인딩된 T 타입에 대한 속성을 targetId 에 지정합니다. 해당 속성과 input 이 바인딩됩니다.
 
-### validValue
+### (optional) validValue
 ```javascript
 validValue = FormValidationTypes = RegExp|FormValidFunction|string[];
 
@@ -80,7 +80,7 @@ Input 에 들어오는 사용자입력값을 정합성 체크할 수 있습니�
 |onSubmit|boolean|정합성 체크 타이밍이 submit 인지 여부|
 |formDefaultShowMessage|(message:string, positionBaseElement:HTMLElement)=>void|메시지와 대상 엘레먼트를 넘기면 즉시 그 위치에 토스트메시지를 띄울 수 있습니다.|
 
-### validCharacter
+### (optional) validCharacter
 
 validValue 와 같은 타입을 가지지만 몇가지 다른점이 있습니다.
 

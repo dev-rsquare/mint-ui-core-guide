@@ -1,1 +1,107 @@
+import { TreeBasic } from '@site/src/components/examples/Tree'
+
 # Tree
+
+트리형태로 렌더링 할 수 있게 해주는 컴포넌트입니다. Root TreeNode 의 내부 children 수 만큼 렌더링됩니다.
+
+토글과 체크 기능이 내장되어 있어서 별도의 구현없이 체크기능을 사용할 수 있습니다. 물론 이 부분을 직접 커스터마이징도 가능합니다.
+
+```javascript
+interface MyData {
+  name:string;
+}
+
+const makeTestData = (cnt:number, limit:number, level:number):TreeNode<MyData>[] => (level < limit ? Array.from(Array(cnt)).map((_, idx) => ({
+  checked: 'none',
+  show: false,
+  children: makeTestData(cnt, limit, level + 1),
+  referenceData: { name: `data ${level} - ${idx}` },
+})) : []);
+
+export function TreeBasic(){
+  
+  const [ data, setData ] = useState<TreeNode<MyData>[]>(makeTestData(3, 6, 1));
+
+  return <Frame>
+    <Tree
+        data={data}
+        setData={setData}
+        treeStyle={{
+          itemPaddingPixel: '30px',
+          treeItemGapPixel: '0px',
+          checkboxColor: '#1AAA84',
+          treeContainerPadding: '10px 5px',
+        }}
+        useDefaultCheck
+        renderItemContent={(item, processToggle) => (
+          <>
+            {/* 더블클릭시에 토글되도록 처리 */}
+            <div onDoubleClick={processToggle} style={{ userSelect: 'none', padding: '10px' }}>{item.referenceData?.name}</div>
+          </>
+        )}
+      />
+  </Frame>
+}
+```
+
+<TreeBasic />
+
+## 속성 설명
+
+### data
+```javascript
+export interface TreeNode<T> {
+  referenceData?:T;
+  children?:TreeNode<T>[];
+  checked:'all'|'partial'|'none';
+  show:boolean;
+}
+
+data = TreeNode<T>[]
+```
+
+컴포넌트를 렌더링할 메인 데이터입니다. children 을 통해 데이터가 반복 표현되는 구조입니다.
+이 구조를 그대로 따라가며 렌더링됩니다.
+
+### setData
+```javascript
+setData = (data:TreeNode<T>[])=>void;
+```
+
+TreeNode 의 데이터는 트리의 노드 상태에 따라 "checked" 나 "show" 등의 값이 변경됩니다.
+이 데이터를 부모 컴포넌트에서 업데이트 받아야 할때 setData 를 사용합니다.
+
+### renderItemContent
+```javascript
+renderItemContent = TreeItemRenderFunction<T> = (item:TreeNode<T>, processToggle:()=>void, processCheck:()=>void)=>ReactNode
+```
+
+트리의 내용을 렌더링할 수 있습니다. 
+해당 노드의 데이터(item) 와 토글(processToggle) 및 체크(processCheck) 처리를 할 수 있도록 함수가 제공됩니다.
+이것을 이용해서 기본 토글과 체크기능을 사용하지 않고 직접 구현도 가능합니다.
+
+### useDefaultExpander
+```javascript
+useDefaultExpander = boolean
+```
+
+기본 토글버튼을 사용할지 정합니다.  기본값은 true 입니다. 토글버튼을 사용하면 TreeNode 내의 "show" 속성이 토글됩니다.
+
+만약 기본 토글을 사용하지 않으면 renderItemContent 내에서 직접 구현하면 됩니다.
+
+### useDefaultCheck
+```javascript
+useDefaultCheck = boolean
+```
+
+기본 체크기능을 사용할 지 여부를 정합니다.  기본값은 false 입니다.  
+체크기능을 사용하면 TreeNode 내의 "checked" 속성이 변경됩니다.
+이 값으로 선택된 값을 필터링할 수 있습니다.
+
+아래는 checked 값의 설명입니다.
+
+|상태|설명|
+|---|---|
+|all|현재 노드를 포함해서 하위가 모두 체크된 상태|
+|partial|현재 노드는 체크되어있지 않지만 하위의 어느 하나는 체크되어 있는 상태|
+|none|현재 노드를 포함하여 하위 모두가 체크되지 않은 상태|
