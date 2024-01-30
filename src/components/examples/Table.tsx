@@ -1,10 +1,7 @@
-import { TableBasic } from '@site/src/components/examples/Table'
+import React, { useState } from "react";
+import { Frame } from "../common/Frame";
+import { Table } from "@mint-ui/core";
 
-# Table
-
-설정을 통해 테이블을 렌더링 할 수 있게 해주는 컴포넌트입니다.
-
-```javascript
 export function TableBasic(){
 
   const [ data, setData ] = useState({
@@ -63,6 +60,3 @@ export function TableBasic(){
     />
   </Frame>
 }
-```
-
-<TableBasic />
