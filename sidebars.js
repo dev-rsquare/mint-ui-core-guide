@@ -61,13 +61,13 @@ const sidebars = {
         'guides/component-virtual-list',
       ],
     },
-    {
-      type: 'category',
-      label: '활용 가이드',
-      items: [
-        'guides/component-basic',
-      ],
-    },
+    // {
+    //   type: 'category',
+    //   label: '활용 가이드',
+    //   items: [
+    //     'guides/component-basic',
+    //   ],
+    // },
   ],
 
 };
